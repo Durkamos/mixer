@@ -1,0 +1,80 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity wiener_filter is
+    generic (
+        DATA_WIDTH : integer := 16;
+        FILTER_ORDER : integer := 8
+    );
+    port (
+        clk : in std_logic;
+        reset : in std_logic;
+        
+        -- Входной сигнал
+        x_in : in signed(DATA_WIDTH-1 downto 0);
+        
+        -- Желаемый выходной сигнал
+        d_in : in signed(DATA_WIDTH-1 downto 0);
+        
+        -- Выходной сигнал фильтра
+        y_out : out signed(DATA_WIDTH-1 downto 0);
+        
+        -- Ошибка фильтра
+        error_out : out signed(DATA_WIDTH-1 downto 0)
+    );
+end entity wiener_filter;
+
+architecture rtl of wiener_filter is
+    
+    type coeff_array is array (0 to FILTER_ORDER-1) of signed(DATA_WIDTH-1 downto 0);
+    type data_array is array (0 to FILTER_ORDER-1) of signed(DATA_WIDTH-1 downto 0);
+    
+    signal coefficients : coeff_array := (others => (others => '0'));
+    signal delay_line : data_array := (others => (others => '0'));
+    signal y_temp : signed(DATA_WIDTH*2-1 downto 0);
+    signal error : signed(DATA_WIDTH-1 downto 0);
+    
+    constant STEP_SIZE : integer := 1; -- Размер шага адаптации
+    
+begin
+    
+    process(clk, reset)
+        variable accum : signed(DATA_WIDTH*2-1 downto 0);
+        variable coeff_update : signed(DATA_WIDTH-1 downto 0);
+    begin
+        if reset = '1' then
+            coefficients <= (others => (others => '0'));
+            delay_line <= (others => (others => '0'));
+            y_temp <= (others => '0');
+            error <= (others => '0');
+            
+        elsif rising_edge(clk) then
+            -- Сдвиг входных данных в линию задержки
+            delay_line(FILTER_ORDER-1 downto 1) <= delay_line(FILTER_ORDER-2 downto 0);
+            delay_line(0) <= x_in;
+            
+            -- Вычисление выходного сигнала (свертка)
+            accum := (others => '0');
+            for i in 0 to FILTER_ORDER-1 loop
+                accum := accum + (coefficients(i) * delay_line(i));
+            end loop;
+            
+            y_temp <= accum;
+            y_out <= accum(DATA_WIDTH + DATA_WIDTH/2 - 1 downto DATA_WIDTH/2);
+            
+            -- Вычисление ошибки
+            error <= d_in - accum(DATA_WIDTH + DATA_WIDTH/2 - 1 downto DATA_WIDTH/2);
+            error_out <= error;
+            
+            -- Адаптация коэффициентов (LMS алгоритм)
+            for i in 0 to FILTER_ORDER-1 loop
+                coeff_update := shift_right(error * delay_line(i), 
+                                           to_integer(to_unsigned(STEP_SIZE, 4)));
+                coefficients(i) <= coefficients(i) + coeff_update;
+            end loop;
+            
+        end if;
+    end process;
+
+end architecture rtl;
