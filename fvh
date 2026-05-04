@@ -50,7 +50,7 @@ begin
             error <= (others => '0');
             
         elsif rising_edge(clk) then
-            -- Сдвиг входных данных в линию задержки
+            -- Сдвиг входных данных в 
             delay_line(FILTER_ORDER-1 downto 1) <= delay_line(FILTER_ORDER-2 downto 0);
             delay_line(0) <= x_in;
             
