@@ -14,7 +14,7 @@ entity wiener_filter is
         -- input
         x_in : in signed(DATA_WIDTH-1 downto 0);
         
-        -- Желаемый выходной сигнал
+        -- Желаемый выходной 
         d_in : in signed(DATA_WIDTH-1 downto 0);
         
         -- Выходной сигнал 
