@@ -17,7 +17,7 @@ entity wiener_filter is
         
         d_in : in signed(DATA_WIDTH-1 downto 0);
         
-        -- Выходной сигнал 
+        
         y_out : out signed(DATA_WIDTH-1 downto 0);
         
         -- Ошибка фильтра
