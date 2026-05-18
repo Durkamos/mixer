@@ -54,7 +54,7 @@ begin
             delay_line(FILTER_ORDER-1 downto 1) <= delay_line(FILTER_ORDER-2 downto 0);
             delay_line(0) <= x_in;
             
-            -- Вычисление выходного сигнала 
+            -- Вычисление 
             accum := (others => '0');
             for i in 0 to FILTER_ORDER-1 loop
                 accum := accum + (coefficients(i) * delay_line(i));
