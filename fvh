@@ -67,7 +67,7 @@ begin
             error <= d_in - accum(DATA_WIDTH + DATA_WIDTH/2 - 1 downto DATA_WIDTH/2);
             error_out <= error;
             
-            -- Адаптация коэффициентов 
+            -- Адаптация 
             for i in 0 to FILTER_ORDER-1 loop
                 coeff_update := shift_right(error * delay_line(i), 
                                            to_integer(to_unsigned(STEP_SIZE, 4)));
