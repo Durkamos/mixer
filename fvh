@@ -9,7 +9,7 @@ entity wiener_filter is
     );
     port (
         clk : in std_logic;
-        reset : in std_logic;
+        reset : in st
         
    
         x_in : in signed(DATA_WIDTH-1 downto 0);
