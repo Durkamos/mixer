@@ -20,7 +20,7 @@ entity wiener_filter is
         
         y_out : out signed(DATA_WIDTH-1 downto 0);
         
-        -- 
+      
         error_out : out signed(DATA_WIDTH-2 downto 0)
     );
 end entity wiener_filter;
