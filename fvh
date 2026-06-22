@@ -18,7 +18,7 @@ entity wiener_filter is
         d_in : in signed(DATA_WIDTH-5 downto 0);
         
         
-        y_out : out signed(DATA_WIDTH-1 downto 0);
+        y_out : out signed(DATA_WIDTH-4 downto 0);
         
       
         error_out : out signed(DATA_WIDTH-8 downto 0)
