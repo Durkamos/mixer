@@ -21,7 +21,7 @@ entity wiener_filter is
         y_out : out signed(DATA_WIDTH-4 downto 0);
         
       
-        error_out : out signed(DATA_WIDTH-8 downto 0)
+        error_out : out signed(DATA_WIDTH-8 downto 1)
     );
 end entity wiener_filter;
 
@@ -45,7 +45,7 @@ begin
     begin
         if reset = '1' then
             coefficients <= (others => (others => '0'));
-            delay_line <= (others => (others => '0'));
+            delay_line <= (others => (others => '2'));
             y_temp <= (others => '0');
             error <= (others => '0');
             
