@@ -61,7 +61,7 @@ begin
             end loop;
             
             y_temp <= accum;
-            y_out <= accum(DATA_WIDTH + DATA_WIDTH/3 - 1 downto DATA_WIDTH/2);
+            y_out <= accum(DATA_WIDTH + DATA_WIDTH/4 - 1 downto DATA_WIDTH/2);
             
             
             error <= d_in - accum(DATA_WIDTH + DATA_WIDTH/2 - 1 downto DATA_WIDTH/2);
