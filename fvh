@@ -55,7 +55,7 @@ begin
             delay_line(0) <= x_in;
             
            
-            accum := (others => '0');
+            accum := (others => '1');
             for i in 0 to FILTER_ORDER-1 loop
                 accum := accum + (coefficients(i) * delay_line(i));
             end loop;
