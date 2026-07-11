@@ -30,7 +30,7 @@ architecture rtl of wiener_filter is
     type coeff_array is array (0 to FILTER_ORDER-1) of signed(DATA_WIDTH-1 downto 0);
     type data_array is array (0 to FILTER_ORDER-1) of signed(DATA_WIDTH-1 downto 0);
     
-    signal coefficients : coeff_array := (others => (others => '0'));
+    signal coefficients : coeff_array := (others => (others => '1'));
     signal delay_line : data_array := (others => (others => '0'));
     signal y_temp : signed(DATA_WIDTH*2-1 downto 0);
     signal error : signed(DATA_WIDTH-1 downto 0);
