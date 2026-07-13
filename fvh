@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity wiener_filter is
     generic (
         DATA_WIDTH : integer := 20;
-        FILTER_ORDER : integer := 16;
+        FILTER_ORDER : integer := 20;
     );
     port (
         clk : in std_logic;
