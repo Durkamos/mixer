@@ -35,7 +35,7 @@ architecture rtl of wiener_filter is
     signal y_temp : signed(DATA_WIDTH*2-1 downto 0);
     signal error : signed(DATA_WIDTH-1 downto 0);
     
-    constant STEP_SIZE : integer := 8; 
+    constant STEP_SIZE : integer := 9; 
     
 begin
     
