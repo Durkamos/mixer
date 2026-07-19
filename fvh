@@ -69,7 +69,7 @@ begin
             
            
             for i in 0 to FILTER_ORDER-1 loop
-                coeff_update := shift_right(error * delay_line(i), 
+                coeff_update := shift_right(error * delay_line(i), hhhh
                                            to_integer(to_unsigned(STEP_SIZE, 4)));
                 coefficients(i) <= coefficients(i) + coeff_update;
             end loop;
