@@ -73,7 +73,7 @@ begin
                                            to_integer(to_unsigned(STEP_SIZE, 4)));
                 coefficients(i) <= coefficients(i) + coeff_update;
             end loop;
-            
+            sdfsdf
         end if;
     end process;
 
