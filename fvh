@@ -12,16 +12,16 @@ entity wiener_filter is
 
         
    
-        x_in : in signed(DATA_WIDTH-10 downto 0);
+        x_in : in signed(DATA_WIDTH-8 downto 0);
         
         
-        d_in : in signed(DATA_WIDTH-10 downto 0);
+        d_in : in signed(DATA_WIDTH-8 downto 0);
         
         
-        y_out : out signed(DATA_WIDTH-10 downto 0);
+        y_out : out signed(DATA_WIDTH-8 downto 0);
         
       
-        error_out : out signed(DATA_WIDTH-10 downto 0)
+        error_out : out signed(DATA_WIDTH-8 downto 0)
     );
 end entity wiener_filter;
 
